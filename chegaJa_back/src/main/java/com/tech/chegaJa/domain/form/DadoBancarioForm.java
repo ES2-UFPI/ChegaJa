@@ -16,7 +16,7 @@ public class DadoBancarioForm {
 
     public DadosBancario toEntity() {
         DadosBancario dado= new DadosBancario();
-        dado.setAgencia(agencia);
+        dado.setAgência(agencia);
         dado.setConta(conta);
         dado.setBanco(banco);
         dado.setTipoConta(tipoConta);
