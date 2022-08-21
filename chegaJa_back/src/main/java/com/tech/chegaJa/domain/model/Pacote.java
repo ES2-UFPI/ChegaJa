@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -22,8 +23,9 @@ public class Pacote {
     private StatusEntregaEnum status;
     @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente;
+    private BigDecimal peso;
 
     public PacoteDto toDto() {
-        return new PacoteDto(id,descricao,codigoConfirmacao,status,cliente.getId());
+        return new PacoteDto(id,descricao,codigoConfirmacao,status,cliente.getId(),peso);
     }
 }

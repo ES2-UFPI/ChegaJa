@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -18,12 +19,14 @@ public class PacoteForm {
     @Enumerated(EnumType.STRING)
     private StatusEntregaEnum status;
     private Long idCliente;
+    private BigDecimal peso;
 
     public Pacote toEntity() {
         Pacote pacote = new Pacote();
         pacote.setDescricao(descricao);
         pacote.setCodigoConfirmacao(codigoConfirmacao);
         pacote.setStatus(status);
+        pacote.setPeso(peso);
         return pacote;
     }
 }

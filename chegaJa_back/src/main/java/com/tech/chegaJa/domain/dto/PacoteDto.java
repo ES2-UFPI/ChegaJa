@@ -10,6 +10,7 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToOne;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
@@ -21,4 +22,5 @@ public class PacoteDto {
     @Enumerated(EnumType.STRING)
     private StatusEntregaEnum status;
     private Long idCliente;
+    private BigDecimal peso;
 }

@@ -16,4 +16,6 @@ public class EnderecoDto {
     private String longitude;
     private String latitude;
     private String uf;
+    private String numeroCasa;
+
 }

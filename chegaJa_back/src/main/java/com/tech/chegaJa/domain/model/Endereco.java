@@ -25,7 +25,9 @@ public class Endereco {
     private String longitude;
     private String latitude;
     private String uf;
+    private String numeroCasa;
+
     public EnderecoDto toDto() {
-        return new EnderecoDto(id,bairro,logradouro,complemento,cep,longitude,latitude,uf);
+        return new EnderecoDto(id,bairro,logradouro,complemento,cep,longitude,latitude,uf,numeroCasa);
     }
 }
