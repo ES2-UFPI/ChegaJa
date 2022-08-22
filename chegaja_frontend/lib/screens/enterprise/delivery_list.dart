@@ -3,9 +3,14 @@ import 'package:flutter/material.dart';
 
 import '../../components/delivery_card.dart';
 import '../../components/title.dart';
+import '../../models/client/client.dart';
+import '../../models/delivery/package.dart';
 
 class DeliveryList extends StatefulWidget {
-  const DeliveryList({Key? key}) : super(key: key);
+  DeliveryList({Key? key}) : super(key: key);
+
+  final List<Client> clients = [];
+  final List<Package> packages = [];
 
   @override
   State<DeliveryList> createState() => _DeliveryListState();
@@ -65,7 +70,7 @@ class _DeliveryListState extends State<DeliveryList> {
                             'Pacotes',
                             style: TextStyle(
                               fontSize: 18,
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.bold,
                               color: Color(0xFF262626),
                             ),
                           ),
@@ -78,41 +83,30 @@ class _DeliveryListState extends State<DeliveryList> {
                                   MaterialPageRoute(
                                     builder: (context) => const FormPackage(),
                                   ),
-                                );
+                                ).then((value) {
+                                  if (value != null) {
+                                    setState(() {
+                                      widget.packages.add(value[2]);
+                                      widget.clients.add(value[0]);
+                                    });
+                                  }
+                                });
                               })
                         ],
                       ),
                     ),
                     Expanded(
-                      child: ListView(
+                      child: ListView.builder(
+                        itemCount: widget.clients.length,
                         padding: const EdgeInsets.only(bottom: 20),
                         shrinkWrap: true,
-                        children: const [
-                          DeliveryCard(
-                            clientName: 'João da Silva',
-                            wheigthPackage: '20kg',
-                          ),
-                          DeliveryCard(
-                            clientName: 'João da Silva',
-                            wheigthPackage: '20kg',
-                          ),
-                          DeliveryCard(
-                            clientName: 'João da Silva',
-                            wheigthPackage: '20kg',
-                          ),
-                          DeliveryCard(
-                            clientName: 'João da Silva',
-                            wheigthPackage: '20kg',
-                          ),
-                          DeliveryCard(
-                            clientName: 'João da Silva',
-                            wheigthPackage: '20kg',
-                          ),
-                          DeliveryCard(
-                            clientName: 'João da Silva',
-                            wheigthPackage: '20kg',
-                          )
-                        ],
+                        itemBuilder: (context, index) {
+                          return DeliveryCard(
+                            clientName: widget.clients[index].nome!,
+                            wheigthPackage:
+                                widget.packages[index].peso.toString(),
+                          );
+                        },
                       ),
                     )
                   ],

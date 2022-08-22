@@ -29,12 +29,12 @@ class DeliveryCard extends StatelessWidget {
           clientName,
           style: const TextStyle(
             fontSize: 14,
-            fontWeight: FontWeight.w400,
+            fontWeight: FontWeight.bold,
             color: Color(0xFF262626),
           ),
         ),
         subtitle: Text(
-          wheigthPackage,
+          '$wheigthPackage Kg',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,

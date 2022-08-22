@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.blue,
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const DeliveryList(),
+      home: DeliveryList(),
     );
   }
 }
