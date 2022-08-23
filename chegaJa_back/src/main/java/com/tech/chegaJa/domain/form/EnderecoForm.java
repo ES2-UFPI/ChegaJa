@@ -17,6 +17,7 @@ public class EnderecoForm {
     private String longitude;
     private String latitude;
     private String uf;
+    private String numeroCasa;
 
     public Endereco toEntity() {
         Endereco endereco = new Endereco();
@@ -27,6 +28,7 @@ public class EnderecoForm {
         endereco.setLongitude(this.getLongitude());
         endereco.setLogradouro(this.getLogradouro());
         endereco.setUf(this.getUf());
+        endereco.setNumeroCasa(this.getNumeroCasa());
         return endereco;
     }
 }
