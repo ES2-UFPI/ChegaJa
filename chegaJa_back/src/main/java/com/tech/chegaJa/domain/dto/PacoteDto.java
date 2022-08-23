@@ -23,4 +23,5 @@ public class PacoteDto {
     private StatusEntregaEnum status;
     private Long idCliente;
     private BigDecimal peso;
+    //comentario
 }
