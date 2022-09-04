@@ -4,13 +4,15 @@ class Package {
   String? status;
   int? idCliente;
   double? peso;
+  int? id;
 
   Package(
       {this.descricao,
       this.codigoConfirmacao,
       this.status,
       this.idCliente,
-      this.peso});
+      this.peso,
+      this.id});
 
   Package.fromJson(Map<String, dynamic> json) {
     descricao = json['descricao'];
@@ -18,6 +20,7 @@ class Package {
     status = json['status'];
     idCliente = json['idCliente'];
     peso = json['peso'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
