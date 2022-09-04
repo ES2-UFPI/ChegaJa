@@ -1,4 +1,4 @@
-import 'package:chegaja_frontend/models/client/adress.dart';
+import 'package:chegaja_frontend/models/client/address.dart';
 import 'package:chegaja_frontend/models/client/client.dart';
 import 'package:chegaja_frontend/models/delivery/package.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
@@ -168,7 +168,7 @@ class _FormPackageState extends State<FormPackage> {
   void validateForm() {
     final FormState? form = _formKey.currentState;
     if (form?.validate() ?? false) {
-      Adress newAdress = Adress(
+      Address newAdress = Address(
         bairro: _neighborhoodController.text,
         cep: _cepController.text,
         logradouro: _streetController.text,

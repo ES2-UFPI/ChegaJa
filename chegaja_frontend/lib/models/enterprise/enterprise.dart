@@ -1,4 +1,4 @@
-import 'package:chegaja_frontend/models/payment_method.dart';
+import 'payment_method.dart';
 
 class Enterprise {
   String? email;

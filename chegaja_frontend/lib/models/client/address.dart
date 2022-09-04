@@ -1,4 +1,4 @@
-class Adress {
+class Address {
   String? bairro;
   String? logradouro;
   String? complemento;
@@ -8,7 +8,7 @@ class Adress {
   String? uf;
   String? numero;
 
-  Adress(
+  Address(
       {this.bairro,
       this.logradouro,
       this.complemento,
@@ -18,7 +18,7 @@ class Adress {
       this.uf,
       this.numero});
 
-  Adress.fromJson(Map<String, dynamic> json) {
+  Address.fromJson(Map<String, dynamic> json) {
     bairro = json['bairro'];
     logradouro = json['logradouro'];
     complemento = json['complemento'];
@@ -26,7 +26,7 @@ class Adress {
     longitude = json['longitude'];
     latitude = json['latitude'];
     uf = json['uf'];
-    numero = json['numero'];
+    numero = json['numeroCasa'];
   }
 
   Map<String, dynamic> toJson() {
@@ -38,7 +38,7 @@ class Adress {
     data['longitude'] = longitude;
     data['latitude'] = latitude;
     data['uf'] = uf;
-    data['numero'] = numero;
+    data['numeroCasa'] = numero;
     return data;
   }
 }

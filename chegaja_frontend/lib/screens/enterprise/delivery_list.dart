@@ -1,10 +1,11 @@
-import 'package:chegaja_frontend/screens/enterprise/form_package.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/delivery_card.dart';
 import '../../components/title.dart';
 import '../../models/client/client.dart';
 import '../../models/delivery/package.dart';
+import '../../models/deliveryman/deliveryman.dart';
+import '../../repository/deliveryman_repository.dart';
 
 class DeliveryList extends StatefulWidget {
   DeliveryList({Key? key}) : super(key: key);
@@ -77,20 +78,88 @@ class _DeliveryListState extends State<DeliveryList> {
                           IconButton(
                               icon: const Icon(Icons.add, size: 35),
                               color: const Color(0xFFE30B86),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const FormPackage(),
-                                  ),
-                                ).then((value) {
-                                  if (value != null) {
-                                    setState(() {
-                                      widget.packages.add(value[2]);
-                                      widget.clients.add(value[0]);
-                                    });
-                                  }
-                                });
+                              onPressed: () async {
+                                final deliverymanRepo = DeliverymanRepository();
+                                final deliveryman = Deliveryman(
+                                  nome: "string",
+                                  cpf: "string",
+                                  pesoMaximo: 0,
+                                );
+
+                                print(await deliverymanRepo
+                                    .createDeliveryman(deliveryman));
+                                // final enterpriseRepo = EnterpriseRepository();
+                                // final enterprise = Enterprise(
+                                //   email: "string",
+                                //   senha: "string",
+                                //   telefone: "string",
+                                //   cnpj: "string",
+                                //   nome: "string",
+                                // );
+
+                                // print(await enterpriseRepo
+                                //     .createEnterprise(enterprise));
+
+                                // final packageRepo = PackageRepository();
+
+                                // final package = Package(
+                                //   descricao: "string",
+                                //   codigoConfirmacao: "string",
+                                //   status: "EM_ANDAMENTO",
+                                //   idCliente: 1,
+                                //   peso: 0,
+                                // );
+
+                                // print(await packageRepo.createPackage(package));
+                                // print("-----");
+                                // print(await packageRepo.fecthPackages());
+
+                                // final clientRepo = ClientRepository();
+                                // final addressRepo = AddressRepository();
+
+                                // final client = Client(
+                                //   nome: 'Jorge',
+                                //   contato: '999999999',
+                                //   idEndereco: 1,
+                                // );
+
+                                // String? bairro,
+                                // String? logradouro,
+                                // String? complemento,
+                                // String? cep,
+                                // String? longitude,
+                                // String? latitude,
+                                // String? uf,
+                                // String? numero,
+                                // final address = Address(
+                                //   bairro: "string",
+                                //   logradouro: "string",
+                                //   complemento: "string",
+                                //   cep: "string",
+                                //   longitude: "string",
+                                //   latitude: "string",
+                                //   uf: "string",
+                                //   numero: "string",
+                                // );
+                                // print(await addressRepo.createAddress(address));
+                                // print('---------------');
+                                // print(await addressRepo.fetchAddress());
+
+                                // clientRepo.createClient(client);
+
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => const FormPackage(),
+                                //   ),
+                                // ).then((value) {
+                                //   if (value != null) {
+                                //     setState(() {
+                                //       widget.packages.add(value[2]);
+                                //       widget.clients.add(value[0]);
+                                //     });
+                                //   }
+                                // });
                               })
                         ],
                       ),
