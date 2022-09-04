@@ -4,8 +4,7 @@ import '../../components/delivery_card.dart';
 import '../../components/title.dart';
 import '../../models/client/client.dart';
 import '../../models/delivery/package.dart';
-import '../../models/deliveryman/deliveryman.dart';
-import '../../repository/deliveryman_repository.dart';
+import '../../repository/address_repository.dart';
 
 class DeliveryList extends StatefulWidget {
   DeliveryList({Key? key}) : super(key: key);
@@ -79,15 +78,19 @@ class _DeliveryListState extends State<DeliveryList> {
                               icon: const Icon(Icons.add, size: 35),
                               color: const Color(0xFFE30B86),
                               onPressed: () async {
-                                final deliverymanRepo = DeliverymanRepository();
-                                final deliveryman = Deliveryman(
-                                  nome: "string",
-                                  cpf: "string",
-                                  pesoMaximo: 0,
-                                );
+                                final addressRepo = AddressRepository();
+                                print(
+                                    (await addressRepo.fetchAddress(1)).numero);
 
-                                print(await deliverymanRepo
-                                    .createDeliveryman(deliveryman));
+                                // final deliverymanRepo = DeliverymanRepository();
+                                // final deliveryman = Deliveryman(
+                                //   nome: "string",
+                                //   cpf: "string",
+                                //   pesoMaximo: 0,
+                                // );
+
+                                // print(await deliverymanRepo
+                                //     .createDeliveryman(deliveryman));
                                 // final enterpriseRepo = EnterpriseRepository();
                                 // final enterprise = Enterprise(
                                 //   email: "string",
