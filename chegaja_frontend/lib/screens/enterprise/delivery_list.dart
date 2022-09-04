@@ -1,111 +1,90 @@
+import '../../repository/client_repository.dart';
+import '../../repository/package_repository.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/app_bar_title.dart';
 import '../../components/delivery_card.dart';
-import '../../components/title.dart';
+import '../../components/list_container.dart';
 import '../../models/client/client.dart';
 import '../../models/delivery/package.dart';
 import 'form_package.dart';
 
 class DeliveryList extends StatefulWidget {
-  DeliveryList({Key? key}) : super(key: key);
-
-  final List<Client> clients = [];
-  final List<Package> packages = [];
+  const DeliveryList({Key? key}) : super(key: key);
 
   @override
   State<DeliveryList> createState() => _DeliveryListState();
 }
 
 class _DeliveryListState extends State<DeliveryList> {
+  List<Package> packages = [];
+  List<Client> clients = [];
+
+  final clientRepository = ClientRepository();
+  final packageRepository = PackageRepository();
+
+  bool _loading = true;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await reloadData();
+    });
+    super.initState();
+  }
+
+  Future<void> reloadData() async {
+    if (!_loading) {
+      setState(() {
+        _loading = true;
+      });
+    }
+
+    clients = await clientRepository.fetchClients();
+    packages = await packageRepository.fecthPackages();
+    setState(() {
+      _loading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.fromLTRB(30, 0, 0, 0),
-                child: IconButton(
-                  icon: const Icon(Icons.keyboard_backspace, size: 35),
-                  color: Theme.of(context).colorScheme.primary,
-                  onPressed: () {
-                    // Navigator.pop(context);
-                  },
+          const AppBarTitle(firstTitle: 'Solicite uma', secondTitle: 'entrega'),
+          ListContainer(
+            title: 'Pacotes',
+            child: !_loading
+                ? ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: packages.length,
+                    padding: const EdgeInsets.only(bottom: 20),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return DeliveryCard(
+                        clientName: clients
+                                .singleWhere((element) =>
+                                    element.id == packages[index].idCliente)
+                                .nome ??
+                            'Sem nome',
+                        wheigthPackage: packages[index].peso.toString(),
+                      );
+                    },
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+            action: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FormPackage(),
                 ),
-              ),
-              const BuildTitle(
-                firstTitle: 'Solicite uma',
-                secondTitle: 'entrega',
-              ),
-            ],
-          ),
-          Expanded(
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-                height: MediaQuery.of(context).size.height - 200,
-                width: MediaQuery.of(context).size.width - 50,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: const Color(0xFFF5F5F5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.25),
-                      // spreadRadius: 5,
-                      blurRadius: 4,
-                      offset: const Offset(0, 4), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Pacotes',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF262626),
-                            ),
-                          ),
-                          IconButton(
-                              icon: const Icon(Icons.add, size: 35),
-                              color: const Color(0xFFE30B86),
-                              onPressed: () async {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const FormPackage(),
-                                  ),
-                                );
-                              })
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: widget.clients.length,
-                        padding: const EdgeInsets.only(bottom: 20),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return DeliveryCard(
-                            clientName: widget.clients[index].nome!,
-                            wheigthPackage:
-                                widget.packages[index].peso.toString(),
-                          );
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
+              );
+              reloadData();
+            },
           ),
         ],
       ),
