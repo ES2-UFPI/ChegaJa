@@ -8,15 +8,18 @@ class Enterprise {
   String? cnpj;
   int? idEndereco;
   PaymentMethod? formaPagamentoForm;
+  int? id;
 
-  Enterprise(
-      {this.email,
-      this.senha,
-      this.telefone,
-      this.nome,
-      this.cnpj,
-      this.idEndereco,
-      this.formaPagamentoForm});
+  Enterprise({
+    this.email,
+    this.senha,
+    this.telefone,
+    this.nome,
+    this.cnpj,
+    this.idEndereco,
+    this.formaPagamentoForm,
+    this.id,
+  });
 
   Enterprise.fromJson(Map<String, dynamic> json) {
     email = json['email'];
@@ -28,6 +31,7 @@ class Enterprise {
     formaPagamentoForm = json['formaPagamentoForm'] != null
         ? PaymentMethod.fromJson(json['formaPagamentoForm'])
         : null;
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {

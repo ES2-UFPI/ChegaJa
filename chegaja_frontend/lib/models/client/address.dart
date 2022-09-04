@@ -7,16 +7,19 @@ class Address {
   String? latitude;
   String? uf;
   String? numero;
+  int? id;
 
-  Address(
-      {this.bairro,
-      this.logradouro,
-      this.complemento,
-      this.cep,
-      this.longitude,
-      this.latitude,
-      this.uf,
-      this.numero});
+  Address({
+    this.bairro,
+    this.logradouro,
+    this.complemento,
+    this.cep,
+    this.longitude,
+    this.latitude,
+    this.uf,
+    this.numero,
+    this.id,
+  });
 
   Address.fromJson(Map<String, dynamic> json) {
     bairro = json['bairro'];
@@ -27,6 +30,7 @@ class Address {
     latitude = json['latitude'];
     uf = json['uf'];
     numero = json['numeroCasa'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {

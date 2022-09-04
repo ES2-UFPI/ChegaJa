@@ -1,6 +1,10 @@
+import 'package:chegaja_frontend/components/loading.dart';
 import 'package:chegaja_frontend/models/client/address.dart';
 import 'package:chegaja_frontend/models/client/client.dart';
 import 'package:chegaja_frontend/models/delivery/package.dart';
+import 'package:chegaja_frontend/repository/address_repository.dart';
+import 'package:chegaja_frontend/repository/client_repository.dart';
+import 'package:chegaja_frontend/repository/package_repository.dart';
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 
@@ -14,27 +18,34 @@ class FormPackage extends StatefulWidget {
 }
 
 class _FormPackageState extends State<FormPackage> {
+  final _addressRepository = AddressRepository();
+  final _clientRepository = ClientRepository();
+  final _packageRepository = PackageRepository();
+
   final _formKey = GlobalKey<FormState>();
 
-  final TextEditingController _clientNameController = TextEditingController();
-  final TextEditingController _weightController = TextEditingController();
-  final MaskedTextController _contactController =
-      MaskedTextController(mask: '(00) 00000-0000');
-  final TextEditingController _streetController = TextEditingController();
-  final TextEditingController _neighborhoodController = TextEditingController();
-  final TextEditingController _homeNumberController = TextEditingController();
-  final MaskedTextController _cepController =
-      MaskedTextController(mask: '00000-000');
-  final TextEditingController _packageDescriptionController =
-      TextEditingController();
+  final _clientNameController = TextEditingController()..text = 'teste';
+  final _weightController = TextEditingController()..text = '000';
+  final _contactController = MaskedTextController(mask: '(00) 00000-0000')
+    ..text = '00000000000';
+  final _streetController = TextEditingController()
+    ..text = 'testeeeeeeeeeeeeeeeeeeeeeee';
+  final _neighborhoodController = TextEditingController()
+    ..text = 'testeeeeeeeeeeeeeeeeeeeeeeeee';
+  final _homeNumberController = TextEditingController()..text = '0000';
+  final _cepController = MaskedTextController(mask: '00000-000')
+    ..text = '00000000';
+  final _packageDescriptionController = TextEditingController()..text = 'teste';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          validateForm();
-          // Navigator.of(context).pushNamed('/enterprise/form_delivery');
+        onPressed: () async {
+          loadingDialog(context);
+          await saveForm();
+          if (!mounted) return;
+          Navigator.of(context).pop();
         },
         child: const Icon(Icons.check),
       ),
@@ -165,30 +176,37 @@ class _FormPackageState extends State<FormPackage> {
     );
   }
 
-  void validateForm() {
+  Future<void> saveForm() async {
     final FormState? form = _formKey.currentState;
     if (form?.validate() ?? false) {
-      Address newAdress = Address(
+      Address newAddress = Address(
         bairro: _neighborhoodController.text,
         cep: _cepController.text,
         logradouro: _streetController.text,
         numero: _homeNumberController.text,
       );
 
+      final idAddress = (await _addressRepository.createAddress(newAddress)).id;
+
       Client newClient = Client(
         nome: _clientNameController.text,
-        idEndereco: 1,
+        idEndereco: idAddress,
         contato: _contactController.text,
       );
 
+      final idClient = (await _clientRepository.createClient(newClient)).id;
+
       Package newPackage = Package(
         descricao: _packageDescriptionController.text,
-        idCliente: 1,
+        idCliente: idClient,
         codigoConfirmacao: _contactController.text,
         peso: double.parse(_weightController.text),
       );
 
-      Navigator.pop(context, [newClient, newAdress, newPackage]);
+      await _packageRepository.createPackage(newPackage);
+
+      if (!mounted) return;
+      Navigator.pop(context);
     } else {
       debugPrint('Form is invalid.');
     }

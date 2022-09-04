@@ -15,7 +15,6 @@ class AddressRepository {
 
   Future<Address> createAddress(Address newAddress) async {
     final response = await dio.post('endereco', data: newAddress.toJson());
-    print(response.data);
     return Address.fromJson(response.data);
   }
 

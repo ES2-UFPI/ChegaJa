@@ -6,15 +6,18 @@ class Delivery {
   int? peso;
   int? idEmpresa;
   int? idEntregador;
+  int? id;
 
-  Delivery(
-      {this.data,
-      this.status,
-      this.valorTotal,
-      this.taxaServico,
-      this.peso,
-      this.idEmpresa,
-      this.idEntregador});
+  Delivery({
+    this.data,
+    this.status,
+    this.valorTotal,
+    this.taxaServico,
+    this.peso,
+    this.idEmpresa,
+    this.idEntregador,
+    this.id,
+  });
 
   Delivery.fromJson(Map<String, dynamic> json) {
     data = json['data'];
@@ -24,6 +27,7 @@ class Delivery {
     peso = json['peso'];
     idEmpresa = json['idEmpresa'];
     idEntregador = json['idEntregador'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
