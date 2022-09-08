@@ -2,6 +2,7 @@ package com.tech.chegaJa.service;
 
 import com.tech.chegaJa.domain.dto.ClienteDto;
 import com.tech.chegaJa.domain.dto.EmpresaDto;
+import com.tech.chegaJa.domain.dto.EnderecoDto;
 import com.tech.chegaJa.domain.dto.PacoteDto;
 import com.tech.chegaJa.domain.form.ClienteForm;
 import com.tech.chegaJa.domain.form.PacoteForm;
@@ -22,12 +23,12 @@ import javax.persistence.EntityNotFoundException;
 @Service
 @RequiredArgsConstructor
 public class ClienteService {
-    private final EnderecoRepository endercoRepository;
+    private final EnderecoService enderecoService;
     private final ClienteRepository repository;
     public ClienteDto cadastrar(ClienteForm  form){
         Cliente cliente = form.toEntity();
-        Endereco endereco = endercoRepository.findById(form.getIdEndereco()).get();
-        cliente.setEndereco(endereco);
+        EnderecoDto endereco = enderecoService.cadastrar(form.getEnderecoForm());
+        cliente.setEndereco(enderecoService.verificarExistencia(endereco.getId()));
         repository.save(cliente);
         return cliente.toDto();
     }

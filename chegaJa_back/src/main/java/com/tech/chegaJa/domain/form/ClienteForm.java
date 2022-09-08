@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class ClienteForm {
     private String nome;
     private String contato;
-    private Long idEndereco;
+    private EnderecoForm enderecoForm;
     public Cliente toEntity() {
         Cliente cliente = new Cliente();
         cliente.setNome(nome);

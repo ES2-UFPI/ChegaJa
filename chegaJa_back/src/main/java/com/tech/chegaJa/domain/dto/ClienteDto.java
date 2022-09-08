@@ -14,6 +14,6 @@ public class ClienteDto {
     private Long id;
     private String nome;
     private String contato;
-    private Long idEndereco;
+    private EnderecoDto enderecoDto;
     //comentario
 }
