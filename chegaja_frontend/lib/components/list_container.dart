@@ -50,7 +50,7 @@ class ListContainer extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.add, size: 35),
                       color: const Color(0xFFE30B86),
-                      onPressed: () async {
+                      onPressed: () {
                         action();
                       },
                     ),
