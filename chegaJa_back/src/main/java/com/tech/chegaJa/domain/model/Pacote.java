@@ -26,6 +26,6 @@ public class Pacote {
     private BigDecimal peso;
 
     public PacoteDto toDto() {
-        return new PacoteDto(id,descricao,codigoConfirmacao,status,cliente.getId(),peso);
+        return new PacoteDto(id,descricao,codigoConfirmacao,status,cliente.toDto(),peso);
     }
 }
