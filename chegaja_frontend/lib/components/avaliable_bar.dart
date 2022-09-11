@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 class AvaliableBar extends StatefulWidget {
   const AvaliableBar({Key? key}) : super(key: key);
@@ -9,6 +12,8 @@ class AvaliableBar extends StatefulWidget {
 
 class _AvaliableBarState extends State<AvaliableBar> {
   bool _light = false;
+  final Location location = Location();
+  StreamSubscription<LocationData>? subscription;
 
   @override
   Widget build(BuildContext context) {
@@ -48,14 +53,26 @@ class _AvaliableBarState extends State<AvaliableBar> {
             activeColor: _light
                 ? const Color(0xFFF5F5F5)
                 : Theme.of(context).colorScheme.primary,
-            onChanged: (bool value) {
-              setState(() {
-                _light = value;
-              });
-            },
+            onChanged: changeAvailability,
           )
         ],
       ),
     );
+  }
+
+  Future<void> changeAvailability(bool value) async {
+    setState(() {
+      _light = value;
+    });
+
+    if (value) {
+      await location.getLocation();
+      subscription = location.onLocationChanged.listen((event) {
+        print([event.latitude, event.longitude]);
+      });
+    } else {
+      print('cancel');
+      subscription?.cancel();
+    }
   }
 }
