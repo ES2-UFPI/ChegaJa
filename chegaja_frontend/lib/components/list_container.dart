@@ -5,12 +5,12 @@ class ListContainer extends StatelessWidget {
     Key? key,
     required this.child,
     required this.title,
-    required this.action,
+    this.action,
   }) : super(key: key);
 
   final Widget child;
   final String title;
-  final Function action;
+  final Function? action;
 
   @override
   Widget build(BuildContext context) {
@@ -47,13 +47,14 @@ class ListContainer extends StatelessWidget {
                         color: Color(0xFF262626),
                       ),
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.add, size: 35),
-                      color: const Color(0xFFE30B86),
-                      onPressed: () {
-                        action();
-                      },
-                    ),
+                    if (action != null)
+                      IconButton(
+                        icon: const Icon(Icons.add, size: 35),
+                        color: const Color(0xFFE30B86),
+                        onPressed: () {
+                          action!();
+                        },
+                      ),
                   ],
                 ),
               ),

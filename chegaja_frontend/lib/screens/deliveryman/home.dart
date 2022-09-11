@@ -1,4 +1,4 @@
-import 'package:chegaja_frontend/components/app_bar_title.dart';
+import 'package:chegaja_frontend/components/app_titles/app_bar_title.dart';
 import 'package:chegaja_frontend/components/avaliable_bar.dart';
 import 'package:chegaja_frontend/components/delivery_card2.dart';
 import 'package:chegaja_frontend/components/list_container.dart';
@@ -21,6 +21,7 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
           const AppBarTitle(
             firstTitle: 'Nome',
             secondTitle: 'do entregador',
+            back: false,
           ),
           const SizedBox(
             height: 30,
@@ -31,7 +32,6 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
           ),
           ListContainer(
             title: 'Pacotes',
-            action: () {},
             child: Column(
               children: const [
                 DeliveryCard2(
