@@ -1,7 +1,7 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 
-import '../../components/app_bar_title.dart';
+import '../../components/app_titles/app_bar_title.dart';
 import '../../components/form_field.dart';
 import '../../components/loading.dart';
 import '../../models/client/address.dart';
