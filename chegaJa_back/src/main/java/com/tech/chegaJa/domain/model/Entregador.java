@@ -23,6 +23,8 @@ public class Entregador {
     private String nome;
     private String cpf;
     private BigDecimal pesoMaximo;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 
     public void setCnpj(String cpf) {
 
