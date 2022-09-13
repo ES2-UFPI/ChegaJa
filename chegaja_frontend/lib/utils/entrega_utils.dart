@@ -23,8 +23,8 @@ class EntregaUtils {
 
     price += (price * taxe);
 
-    String priceAux = price.toStringAsFixed(2);
+    double priceReturn = double.parse(price.toStringAsFixed(2));
 
-    return priceAux as double;
+    return priceReturn;
   }
 }
