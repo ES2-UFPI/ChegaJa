@@ -64,11 +64,8 @@ class _DeliveryListState extends State<DeliveryList> {
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return DeliveryCard(
-                        clientName: clients
-                                .singleWhere((element) =>
-                                    element.id == packages[index].idCliente)
-                                .nome ??
-                            'Sem nome',
+                        clientName:
+                            packages[index].clienteForm?.nome ?? 'sem nome',
                         wheigthPackage: packages[index].peso.toString(),
                       );
                     },

@@ -1,28 +1,27 @@
+import 'package:chegaja_frontend/models/client/address.dart';
+
 class Client {
   String? nome;
   String? contato;
-  int? idEndereco;
-  int? id;
+  Address? enderecoForm;
 
-  Client({
-    this.nome,
-    this.contato,
-    this.idEndereco,
-    this.id,
-  });
+  Client({this.nome, this.contato, this.enderecoForm});
 
   Client.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
     nome = json['nome'];
     contato = json['contato'];
-    idEndereco = json['idEndereco'];
+    enderecoForm = json['enderecoDto'] != null
+        ? new Address.fromJson(json['enderecoDto'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['nome'] = nome;
-    data['contato'] = contato;
-    data['idEndereco'] = idEndereco;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['nome'] = this.nome;
+    data['contato'] = this.contato;
+    if (this.enderecoForm != null) {
+      data['enderecoForm'] = this.enderecoForm!.toJson();
+    }
     return data;
   }
 }
