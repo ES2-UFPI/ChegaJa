@@ -1,4 +1,4 @@
-class Adress {
+class Address {
   String? bairro;
   String? logradouro;
   String? complemento;
@@ -6,9 +6,9 @@ class Adress {
   String? longitude;
   String? latitude;
   String? uf;
-  String? numero;
+  String? numeroCasa;
 
-  Adress(
+  Address(
       {this.bairro,
       this.logradouro,
       this.complemento,
@@ -16,9 +16,9 @@ class Adress {
       this.longitude,
       this.latitude,
       this.uf,
-      this.numero});
+      this.numeroCasa});
 
-  Adress.fromJson(Map<String, dynamic> json) {
+  Address.fromJson(Map<String, dynamic> json) {
     bairro = json['bairro'];
     logradouro = json['logradouro'];
     complemento = json['complemento'];
@@ -26,19 +26,19 @@ class Adress {
     longitude = json['longitude'];
     latitude = json['latitude'];
     uf = json['uf'];
-    numero = json['numero'];
+    numeroCasa = json['numeroCasa'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['bairro'] = bairro;
-    data['logradouro'] = logradouro;
-    data['complemento'] = complemento;
-    data['cep'] = cep;
-    data['longitude'] = longitude;
-    data['latitude'] = latitude;
-    data['uf'] = uf;
-    data['numero'] = numero;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['bairro'] = this.bairro;
+    data['logradouro'] = this.logradouro;
+    data['complemento'] = this.complemento;
+    data['cep'] = this.cep;
+    data['longitude'] = this.longitude;
+    data['latitude'] = this.latitude;
+    data['uf'] = this.uf;
+    data['numeroCasa'] = this.numeroCasa;
     return data;
   }
 }

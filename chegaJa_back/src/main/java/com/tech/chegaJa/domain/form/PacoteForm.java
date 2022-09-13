@@ -18,7 +18,7 @@ public class PacoteForm {
     private String codigoConfirmacao;
     @Enumerated(EnumType.STRING)
     private StatusEntregaEnum status;
-    private Long idCliente;
+    private ClienteForm clienteForm;
     private BigDecimal peso;
 
     public Pacote toEntity() {

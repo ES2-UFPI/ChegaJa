@@ -5,14 +5,17 @@ class Deliveryman {
   String? nome;
   String? cpf;
   int? pesoMaximo;
+  int? id;
 
-  Deliveryman(
-      {this.email,
-      this.senha,
-      this.telefone,
-      this.nome,
-      this.cpf,
-      this.pesoMaximo});
+  Deliveryman({
+    this.email,
+    this.senha,
+    this.telefone,
+    this.nome,
+    this.cpf,
+    this.pesoMaximo,
+    this.id,
+  });
 
   Deliveryman.fromJson(Map<String, dynamic> json) {
     email = json['email'];
@@ -21,6 +24,7 @@ class Deliveryman {
     nome = json['nome'];
     cpf = json['cpf'];
     pesoMaximo = json['pesoMaximo'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {

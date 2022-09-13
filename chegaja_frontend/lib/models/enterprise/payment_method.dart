@@ -5,14 +5,17 @@ class PaymentMethod {
   String? codigo;
   String? nomeTitular;
   String? tipoPagamento;
+  int? id;
 
-  PaymentMethod(
-      {this.numeroCartao,
-      this.bandeira,
-      this.dataVencimento,
-      this.codigo,
-      this.nomeTitular,
-      this.tipoPagamento});
+  PaymentMethod({
+    this.numeroCartao,
+    this.bandeira,
+    this.dataVencimento,
+    this.codigo,
+    this.nomeTitular,
+    this.tipoPagamento,
+    this.id,
+  });
 
   PaymentMethod.fromJson(Map<String, dynamic> json) {
     numeroCartao = json['numeroCartao'];
@@ -21,6 +24,7 @@ class PaymentMethod {
     codigo = json['codigo'];
     nomeTitular = json['nomeTitular'];
     tipoPagamento = json['tipoPagamento'];
+    id = json['id'];
   }
 
   Map<String, dynamic> toJson() {
