@@ -33,9 +33,7 @@ class Home extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           Text(
             "Encontre um entregador \nou faça uma entrega",
             style: TextStyle(
@@ -44,9 +42,7 @@ class Home extends StatelessWidget {
               color: Theme.of(context).colorScheme.primary,
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           const Text(
             "Faça o login ou cadastro para começar \na fazer entregas ou contratar entregas",
             style: TextStyle(
@@ -55,9 +51,7 @@ class Home extends StatelessWidget {
               color: Color(0xFF262626),
             ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
+          const SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -73,16 +67,17 @@ class Home extends StatelessWidget {
                 },
               ),
               GestureButton(
-                  text: "Sou entregador",
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeDeliveryman(),
-                      ),
-                    );
-                  },
-                  color: Color(0xFFF5F5F5)),
+                text: "Sou entregador",
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const HomeDeliveryman(),
+                    ),
+                  );
+                },
+                color: const Color(0xFFF5F5F5),
+              ),
             ],
           )
         ],

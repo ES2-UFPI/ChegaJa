@@ -1,4 +1,3 @@
-import 'package:chegaja_frontend/screens/deliveryman/home.dart';
 import 'package:flutter/material.dart';
 
 class GestureButton extends StatelessWidget {
@@ -26,8 +25,9 @@ class GestureButton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              color:
-                  color != null ? Theme.of(context).colorScheme.primary : color,
+              color: color == null
+                  ? const Color(0xFFF5F5F5)
+                  : Theme.of(context).colorScheme.primary,
               fontSize: 14,
               fontWeight: FontWeight.w700,
             ),
