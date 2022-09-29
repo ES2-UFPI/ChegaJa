@@ -4,6 +4,7 @@ import com.tech.chegaJa.domain.dto.EmpresaDto;
 import com.tech.chegaJa.domain.dto.EntregaDto;
 import com.tech.chegaJa.domain.dto.EntregadorDto;
 import com.tech.chegaJa.domain.form.EntregaForm;
+import com.tech.chegaJa.domain.form.EntregaStatusForm;
 import com.tech.chegaJa.domain.form.EntregadorForm;
 import com.tech.chegaJa.domain.model.Empresa;
 import com.tech.chegaJa.domain.model.Entrega;
@@ -42,5 +43,11 @@ public class EntregaService {
     }
     public Entrega verificarExistencia(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entrega inexistente"));
+    }
+
+    public EntregaDto atualizar(Long id, EntregaStatusForm form) {
+        Entrega entrega= verificarExistencia(id);
+        entrega.setStatus(form.getStatus());
+        return(entrega.toDto());
     }
 }

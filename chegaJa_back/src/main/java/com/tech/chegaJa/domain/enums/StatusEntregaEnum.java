@@ -8,7 +8,9 @@ import lombok.Getter;
 public enum StatusEntregaEnum {
         EM_ANDAMENTO("Em andamento"),
         FINALIZADA("Finalizada"),
-        SOLICITADA("Solicitada");
+        SOLICITADA("Solicitada"),
+        RECOLHIDA("Recolhida");
+
 
         private String descricao;
 }
