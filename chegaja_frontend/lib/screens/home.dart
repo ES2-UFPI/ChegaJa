@@ -1,7 +1,7 @@
+import 'package:chegaja_frontend/screens/deliveryman/home.dart';
 import 'package:chegaja_frontend/screens/enterprise/delivery_list.dart';
 import 'package:flutter/material.dart';
-
-import 'deliveryman/home.dart';
+import '../components/gesture_button.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -61,8 +61,9 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
-                onTap: () {
+              GestureButton(
+                text: "Sou uma empresa",
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -70,53 +71,18 @@ class Home extends StatelessWidget {
                     ),
                   );
                 },
-                child: Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width / 2.2,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.primary,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Sou uma empresa",
-                      style: TextStyle(
-                        color: Color(0xFFF5F5F5),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomeDeliveryman(),
-                    ),
-                  );
-                },
-                child: Container(
-                  height: 60,
-                  width: MediaQuery.of(context).size.width / 2.2,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Sou entregador",
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.primary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
+              GestureButton(
+                  text: "Sou entregador",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeDeliveryman(),
                       ),
-                    ),
-                  ),
-                ),
-              ),
+                    );
+                  },
+                  color: Color(0xFFF5F5F5)),
             ],
           )
         ],
