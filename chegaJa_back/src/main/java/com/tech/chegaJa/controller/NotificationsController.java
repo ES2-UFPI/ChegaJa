@@ -16,15 +16,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping("/notificacoes")
-@RequiredArgsConstructor
 public class NotificationsController {
 
     FirebaseMessagingService service;
 
-    @PostMapping
-    public ResponseEntity<ClienteDto> solicitarEntrega(@RequestBody NotificacaoForm form, UriComponentsBuilder uriBuilder){
-        //ClienteDto dto = service.cadastrar(form);
+    @RequestMapping("/notificacoes/solicitacao/entrega")
+    public void solicitarEntrega(@RequestBody NotificacaoForm form){
         Note note = new Note();
 
         try {
@@ -33,8 +30,6 @@ public class NotificationsController {
 
         }
 
-        URI uri = uriBuilder.path("/notificacoes/solicitacao/entrega").buildAndExpand(dto.getId()).toUri();
-        return ResponseEntity.created(uri).body(dto);
     }
 
 }
