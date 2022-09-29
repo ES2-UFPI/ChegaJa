@@ -19,9 +19,9 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
       body: Column(
         children: [
           const AppBarTitle(
-            firstTitle: 'Nome',
-            secondTitle: 'do entregador',
-            back: false,
+            firstTitle: 'Suas',
+            secondTitle: 'entregas',
+            // back: false,
           ),
           const SizedBox(
             height: 30,
@@ -31,7 +31,7 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
             height: 20,
           ),
           ListContainer(
-            title: 'Pacotes',
+            title: 'Entregas',
             child: Column(
               children: const [
                 DeliveryCard2(
