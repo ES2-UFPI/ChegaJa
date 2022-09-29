@@ -1,5 +1,5 @@
-import 'package:chegaja_frontend/screens/deliveryman/home.dart';
-import 'package:chegaja_frontend/screens/deliveryman/packages.dart';
+import 'package:chegaja_frontend/screens/enterprise/delivery_list.dart';
+import 'package:chegaja_frontend/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         // primarySwatch: Colors.blue,
         textTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: const PackagesDeliveryman(),
+      home: const Home(),
     );
   }
 }

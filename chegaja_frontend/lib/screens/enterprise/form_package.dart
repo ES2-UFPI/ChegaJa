@@ -168,22 +168,18 @@ class _FormPackageState extends State<FormPackage> {
         bairro: _neighborhoodController.text,
         cep: _cepController.text,
         logradouro: _streetController.text,
-        numero: _homeNumberController.text,
+        numeroCasa: _homeNumberController.text,
       );
-
-      final idAddress = (await _addressRepository.createAddress(newAddress)).id;
 
       Client newClient = Client(
         nome: _clientNameController.text,
-        idEndereco: idAddress,
+        enderecoForm: newAddress,
         contato: _contactController.text,
       );
 
-      final idClient = (await _clientRepository.createClient(newClient)).id;
-
       Package newPackage = Package(
         descricao: _packageDescriptionController.text,
-        idCliente: idClient,
+        clienteForm: newClient,
         codigoConfirmacao: _contactController.text,
         peso: double.parse(_weightController.text),
       );
