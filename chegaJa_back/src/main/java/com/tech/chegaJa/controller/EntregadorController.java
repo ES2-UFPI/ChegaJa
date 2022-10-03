@@ -3,7 +3,9 @@ package com.tech.chegaJa.controller;
 import com.tech.chegaJa.domain.dto.EmpresaDto;
 import com.tech.chegaJa.domain.dto.EntregaDto;
 import com.tech.chegaJa.domain.dto.EntregadorDto;
+import com.tech.chegaJa.domain.dto.EntregadorLocDto;
 import com.tech.chegaJa.domain.form.EntregadorForm;
+import com.tech.chegaJa.domain.form.EntregadorLocForm;
 import com.tech.chegaJa.domain.model.Entregador;
 import com.tech.chegaJa.service.EntregadorService;
 import lombok.RequiredArgsConstructor;
@@ -35,5 +37,9 @@ public class EntregadorController{
     @GetMapping("/{id}")
     public ResponseEntity<EntregadorDto> visualizar(@PathVariable Long id){
         return ResponseEntity.ok(service.visualizar(id));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<EntregadorLocDto> alterarLocalizacao(@PathVariable Long id, @RequestBody EntregadorLocForm form){
+        return ResponseEntity.ok(service.atualizarLoc(id,form));
     }
 }

@@ -2,8 +2,10 @@ package com.tech.chegaJa.service;
 
 import com.tech.chegaJa.domain.dto.EmpresaDto;
 import com.tech.chegaJa.domain.dto.EntregadorDto;
+import com.tech.chegaJa.domain.dto.EntregadorLocDto;
 import com.tech.chegaJa.domain.form.EmpresaForm;
 import com.tech.chegaJa.domain.form.EntregadorForm;
+import com.tech.chegaJa.domain.form.EntregadorLocForm;
 import com.tech.chegaJa.domain.model.Empresa;
 import com.tech.chegaJa.domain.model.Entregador;
 import com.tech.chegaJa.repository.EmpresaRepository;
@@ -33,5 +35,13 @@ public class EntregadorService {
     }
     public Entregador verificarExistencia(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entregador inexistente"));
+    }
+
+    public EntregadorLocDto atualizarLoc(Long id, EntregadorLocForm form) {
+        Entregador entregador = verificarExistencia(id);
+        entregador.setLatitude(form.getLatitude());
+        entregador.setLongitude(form.getLongitude());
+        repository.save(entregador);
+        return new EntregadorLocDto(entregador.getLatitude(),entregador.getLongitude());
     }
 }
