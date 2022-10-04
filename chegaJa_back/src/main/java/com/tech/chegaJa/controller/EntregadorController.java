@@ -17,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.math.BigDecimal;
 import java.net.URI;
 @RestController
 @RequestMapping("/entregadores")
@@ -41,5 +42,10 @@ public class EntregadorController{
     @PutMapping("/{id}")
     public ResponseEntity<EntregadorLocDto> alterarLocalizacao(@PathVariable Long id, @RequestBody EntregadorLocForm form){
         return ResponseEntity.ok(service.atualizarLoc(id,form));
+    }
+    @GetMapping("/proximos")
+    public ResponseEntity<Page<EntregadorDto>> listarProximos(@ParameterObject @PageableDefault(sort = "id") Pageable pageable
+            , @RequestParam(value = "latitude")BigDecimal latitude, @RequestParam(value="longitude")BigDecimal longitude){
+        return ResponseEntity.ok(service.listarProximos(pageable,latitude,longitude));
     }
 }
