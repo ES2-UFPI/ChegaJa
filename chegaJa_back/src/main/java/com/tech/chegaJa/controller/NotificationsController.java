@@ -21,14 +21,10 @@ public class NotificationsController {
     FirebaseMessagingService service;
 
     @RequestMapping("/notificacoes/solicitacao/entrega")
-    public void solicitarEntrega(@RequestBody NotificacaoForm form){
-        Note note = new Note();
-
-        try {
-            service.sendNotification(note, form.getToken());
-        } catch (FirebaseMessagingException e) {
-
-        }
+    @ResponseBody
+    public void enviarSolicitarEntrega(@RequestBody Note note,
+                                       @RequestParam String token) throws FirebaseMessagingException{
+        return firebaseService.sendNotification(note, token);
 
     }
 
