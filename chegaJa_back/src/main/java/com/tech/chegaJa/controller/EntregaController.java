@@ -4,6 +4,7 @@ import com.tech.chegaJa.domain.dto.EmpresaDto;
 import com.tech.chegaJa.domain.dto.EntregaDto;
 import com.tech.chegaJa.domain.form.EmpresaForm;
 import com.tech.chegaJa.domain.form.EntregaForm;
+import com.tech.chegaJa.domain.form.EntregaStatusForm;
 import com.tech.chegaJa.service.EmpresaService;
 import com.tech.chegaJa.service.EntregaService;
 import lombok.RequiredArgsConstructor;
@@ -36,5 +37,9 @@ public class EntregaController {
     @GetMapping("/{id}")
     public ResponseEntity<EntregaDto> visualizar(@PathVariable Long id){
         return ResponseEntity.ok(service.visualizar(id));
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<EntregaDto> atualizar(@PathVariable Long id, @RequestBody EntregaStatusForm form){
+        return ResponseEntity.ok(service.atualizar(id, form));
     }
 }
