@@ -3,9 +3,11 @@ package com.tech.chegaJa.service;
 import com.tech.chegaJa.domain.dto.EmpresaDto;
 import com.tech.chegaJa.domain.dto.EntregaDto;
 import com.tech.chegaJa.domain.dto.EntregadorDto;
+import com.tech.chegaJa.domain.dto.PacoteDto;
 import com.tech.chegaJa.domain.form.EntregaForm;
 import com.tech.chegaJa.domain.form.EntregaStatusForm;
 import com.tech.chegaJa.domain.form.EntregadorForm;
+import com.tech.chegaJa.domain.form.PacoteForm;
 import com.tech.chegaJa.domain.model.Empresa;
 import com.tech.chegaJa.domain.model.Entrega;
 import com.tech.chegaJa.domain.model.Entregador;
@@ -18,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @Service
@@ -32,6 +35,8 @@ public class EntregaService {
         Empresa empresa = empresaRepository.findById(form.getIdEmpresa()).get();
         entrega.setEmpresa(empresa);
         repository.save(entrega);
+        entrega.setPacotes(new ArrayList<>());
+
         return entrega.toDto();
     }
     public Page<EntregaDto> listar(Pageable paginacao){
