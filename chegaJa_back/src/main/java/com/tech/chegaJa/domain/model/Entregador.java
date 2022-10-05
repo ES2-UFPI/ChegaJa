@@ -40,4 +40,13 @@ public class Entregador {
         BigDecimal segundo = this.latitude.subtract(longitude).pow(2);
         return primeiro.add(segundo).sqrt(new MathContext(10));
     }
+
+    public BigDecimal getDistancia(BigDecimal latitude, BigDecimal longitude) {
+        BigDecimal primeiro = this.latitude.subtract(latitude).pow(2);
+        BigDecimal segundo = this.latitude.subtract(longitude).pow(2);
+        BigDecimal soma=primeiro.add(segundo);
+        double aux= soma.doubleValue();
+        BigDecimal raiz=new BigDecimal(Math.sqrt(aux));
+        return raiz;
+    }
 }
