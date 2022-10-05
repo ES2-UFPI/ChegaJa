@@ -1,17 +1,12 @@
-import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
+import 'package:chegaja_frontend/models/delivery/delivery.dart';
 import 'package:flutter/material.dart';
 
 class DeliveryCard2 extends StatelessWidget {
-  const DeliveryCard2({
-    Key? key,
-    required this.wheigthPackage,
-    required this.deliveryNumber,
-    required this.status,
-  }) : super(key: key);
+  DeliveryCard2({Key? key, required this.delivery, this.changeStatus})
+      : super(key: key);
 
-  final String deliveryNumber;
-  final String wheigthPackage;
-  final ShippingStatus status;
+  final Delivery delivery;
+  Function? changeStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +19,23 @@ class DeliveryCard2 extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        trailing: Chip(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          avatar: CircleAvatar(
-            backgroundColor: status.color,
+        trailing: GestureDetector(
+          onTap: () {
+            if (changeStatus != null) {
+              changeStatus!();
+            }
+          },
+          child: Chip(
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            avatar: CircleAvatar(
+              backgroundColor: delivery.status?.color ?? Colors.black12,
+            ),
+            label: Text(delivery.status?.description ?? 'Sem status',
+                style: const TextStyle(color: Color(0xFFF5F5F5))),
           ),
-          label: Text(status.description,
-              style: const TextStyle(color: Color(0xFFF5F5F5))),
         ),
         title: Text(
-          deliveryNumber,
+          delivery.id.toString(),
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
@@ -41,7 +43,7 @@ class DeliveryCard2 extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          '$wheigthPackage Kg',
+          '${delivery.peso} Kg',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,

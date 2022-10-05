@@ -1,5 +1,7 @@
 import 'package:chegaja_frontend/models/delivery/delivery.dart';
+import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:chegaja_frontend/utils/endpoint_utils.dart';
+import 'package:dio/src/response.dart';
 
 class DeliveryRepository {
   Future<List<Delivery>> fetchDeliveries() async {
@@ -22,5 +24,23 @@ class DeliveryRepository {
     final response = await dio.get('entregas/$id');
 
     return Delivery.fromJson(response.data);
+  }
+
+  Future putStatus(int id, ShippingStatus status,
+      {bool isEnterprise = true}) async {
+    Response response;
+    if (isEnterprise) {
+      response = await dio.put(
+        'entregas/$id',
+        data: {"status": status.code},
+      );
+    } else {
+      response = await dio.put(
+        'entregas/$id',
+        data: {"status": status.code},
+      );
+    }
+    print(response.data);
+    return response;
   }
 }

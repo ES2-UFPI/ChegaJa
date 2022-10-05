@@ -1,8 +1,11 @@
 import 'package:chegaja_frontend/components/app_titles/app_bar_title.dart';
 import 'package:chegaja_frontend/components/delivery_card2.dart';
 import 'package:chegaja_frontend/components/list_container.dart';
+import 'package:chegaja_frontend/models/delivery/delivery.dart';
 import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:flutter/material.dart';
+
+import '../../repository/delivery_repository.dart';
 
 class PackagesDeliveryman extends StatefulWidget {
   const PackagesDeliveryman({Key? key}) : super(key: key);
@@ -12,6 +15,8 @@ class PackagesDeliveryman extends StatefulWidget {
 }
 
 class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
+  final deliveryRepository = DeliveryRepository();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,27 +29,46 @@ class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
           ListContainer(
             title: "Pacotes",
             child: Column(
-              children: const [
-                DeliveryCard2(
-                  wheigthPackage: "peso",
-                  deliveryNumber: "Nome",
-                  status: ShippingStatus.inProgress,
-                ),
-                DeliveryCard2(
-                  wheigthPackage: "peso",
-                  deliveryNumber: "Nome",
-                  status: ShippingStatus.finished,
-                ),
-                DeliveryCard2(
-                  wheigthPackage: "peso",
-                  deliveryNumber: "Nome",
+              children: [
+                Delivery(
+                  id: 1,
                   status: ShippingStatus.waiting,
+                  peso: 10,
                 ),
-              ],
+                Delivery(
+                  id: 1,
+                  status: ShippingStatus.waiting,
+                  peso: 10,
+                ),
+                Delivery(
+                  id: 1,
+                  status: ShippingStatus.waiting,
+                  peso: 10,
+                ),
+              ]
+                  .map(
+                    (e) => DeliveryCard2(
+                      delivery: e,
+                      changeStatus: () {
+                        changeStatus(e);
+                      },
+                    ),
+                  )
+                  .toList(),
             ),
           )
         ],
       ),
     );
+  }
+
+  void changeStatus(Delivery delivery) {
+    if (delivery.id != null && delivery.status != null) {
+      deliveryRepository.putStatus(
+        delivery.id!,
+        delivery.status!,
+        isEnterprise: true,
+      );
+    }
   }
 }

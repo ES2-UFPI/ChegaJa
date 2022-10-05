@@ -3,24 +3,20 @@ import 'package:flutter/material.dart';
 import '../../components/app_titles/app_bar_title.dart';
 import '../../components/delivery_card.dart';
 import '../../components/list_container.dart';
-import '../../models/client/client.dart';
 import '../../models/delivery/package.dart';
-import '../../repository/client_repository.dart';
 import '../../repository/package_repository.dart';
 import 'form_package.dart';
 
-class DeliveryList extends StatefulWidget {
-  const DeliveryList({Key? key}) : super(key: key);
+class PackagesList extends StatefulWidget {
+  const PackagesList({Key? key}) : super(key: key);
 
   @override
-  State<DeliveryList> createState() => _DeliveryListState();
+  State<PackagesList> createState() => _PackagesListState();
 }
 
-class _DeliveryListState extends State<DeliveryList> {
+class _PackagesListState extends State<PackagesList> {
   List<Package> packages = [];
-  List<Client> clients = [];
 
-  final clientRepository = ClientRepository();
   final packageRepository = PackageRepository();
 
   bool _loading = true;
@@ -40,7 +36,6 @@ class _DeliveryListState extends State<DeliveryList> {
       });
     }
 
-    clients = await clientRepository.fetchClients();
     packages = await packageRepository.fecthPackages();
     setState(() {
       _loading = false;
