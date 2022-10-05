@@ -8,4 +8,14 @@ class DeliverymanRepository {
 
     return Deliveryman.fromJson(response.data);
   }
+
+  Future putLocation(int id, double latitude, double longitude) async {
+    final response = await dio.put('entregadores/$id', data: {
+      "latitude": latitude,
+      "longitude": longitude,
+    });
+
+    print(response.data);
+    return response;
+  }
 }

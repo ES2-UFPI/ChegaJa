@@ -17,13 +17,14 @@ class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
     return Scaffold(
       body: Column(
         children: [
-          AppBarTitle(
+          const AppBarTitle(
             firstTitle: "Pacotes",
             secondTitle: "da entrega",
           ),
           ListContainer(
+            title: "Pacotes",
             child: Column(
-              children: [
+              children: const [
                 DeliveryCard2(
                   wheigthPackage: "peso",
                   deliveryNumber: "Nome",
@@ -41,7 +42,6 @@ class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
                 ),
               ],
             ),
-            title: "Pacotes",
           )
         ],
       ),
