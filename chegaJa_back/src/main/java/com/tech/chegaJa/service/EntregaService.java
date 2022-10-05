@@ -16,11 +16,13 @@ import com.tech.chegaJa.repository.EntregaRepository;
 import com.tech.chegaJa.repository.EntregadorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -54,5 +56,20 @@ public class EntregaService {
         Entrega entrega= verificarExistencia(id);
         entrega.setStatus(form.getStatus());
         return(entrega.toDto());
+    }
+
+    public Page<EntregaDto> listarPorEmpresa(Pageable pageable, Long idEmpresa) {
+        List<Entrega> entregas=repository.findAllByEmpresa_Id(idEmpresa);
+        final int start = (int)pageable.getOffset();
+        final int end = Math.min((start + pageable.getPageSize()), entregas.size());
+        Page<Entrega> pagina=new PageImpl<>(entregas.subList(start,end), pageable, entregas.size());
+        return pagina.map(Entrega::toDto);
+    }
+    public Page<EntregaDto> listarPorEntregador(Pageable pageable, Long idEntregador) {
+        List<Entrega> entregas=repository.findAllByEntregador_Id(idEntregador);
+        final int start = (int)pageable.getOffset();
+        final int end = Math.min((start + pageable.getPageSize()), entregas.size());
+        Page<Entrega> pagina=new PageImpl<>(entregas.subList(start,end), pageable, entregas.size());
+        return pagina.map(Entrega::toDto);
     }
 }
