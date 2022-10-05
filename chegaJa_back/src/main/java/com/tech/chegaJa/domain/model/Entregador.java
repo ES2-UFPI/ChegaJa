@@ -31,6 +31,6 @@ public class Entregador {
     }
 
     public EntregadorDto toDto(){
-        return new EntregadorDto(this.id,this.cpf,this.nome, pesoMaximo);
+        return new EntregadorDto(this.id,this.nome,this.cpf, pesoMaximo);
     }
 }
