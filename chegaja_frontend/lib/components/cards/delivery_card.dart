@@ -1,12 +1,12 @@
 import 'package:chegaja_frontend/models/delivery/delivery.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryCard2 extends StatelessWidget {
-  DeliveryCard2({Key? key, required this.delivery, this.changeStatus})
+class DeliveryCard extends StatelessWidget {
+  const DeliveryCard({Key? key, required this.delivery, this.changeStatus})
       : super(key: key);
 
   final Delivery delivery;
-  Function? changeStatus;
+  final Function? changeStatus;
 
   @override
   Widget build(BuildContext context) {

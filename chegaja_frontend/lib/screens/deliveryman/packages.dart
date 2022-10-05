@@ -1,10 +1,10 @@
 import 'package:chegaja_frontend/components/app_titles/app_bar_title.dart';
-import 'package:chegaja_frontend/components/delivery_card2.dart';
 import 'package:chegaja_frontend/components/list_container.dart';
 import 'package:chegaja_frontend/models/delivery/delivery.dart';
 import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/cards/delivery_card.dart';
 import '../../repository/delivery_repository.dart';
 
 class PackagesDeliveryman extends StatefulWidget {
@@ -47,7 +47,7 @@ class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
                 ),
               ]
                   .map(
-                    (e) => DeliveryCard2(
+                    (e) => DeliveryCard(
                       delivery: e,
                       changeStatus: () {
                         changeStatus(e);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../components/app_titles/app_bar_title.dart';
-import '../../components/delivery_card.dart';
+import '../../components/cards/package_card.dart';
 import '../../components/list_container.dart';
 import '../../models/delivery/package.dart';
 import '../../repository/package_repository.dart';
@@ -58,7 +58,7 @@ class _PackagesListState extends State<PackagesList> {
                     padding: const EdgeInsets.only(bottom: 20),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return DeliveryCard(
+                      return PackageCard(
                         clientName:
                             packages[index].clienteForm?.nome ?? 'sem nome',
                         wheigthPackage: packages[index].peso.toString(),

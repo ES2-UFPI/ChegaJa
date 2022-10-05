@@ -1,20 +1,21 @@
-import 'package:chegaja_frontend/components/app_titles/app_bar_title.dart';
-import 'package:chegaja_frontend/components/avaliable_bar.dart';
-import 'package:chegaja_frontend/components/delivery_card2.dart';
-import 'package:chegaja_frontend/components/list_container.dart';
+import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:flutter/material.dart';
 
+import '../../components/app_titles/app_bar_title.dart';
+import '../../components/cards/delivery_card.dart';
+import '../../components/list_container.dart';
 import '../../models/delivery/delivery.dart';
 import '../../repository/delivery_repository.dart';
+import 'packages_list.dart';
 
-class HomeDeliveryman extends StatefulWidget {
-  const HomeDeliveryman({Key? key}) : super(key: key);
+class HomeEnterprise extends StatefulWidget {
+  const HomeEnterprise({Key? key}) : super(key: key);
 
   @override
-  State<HomeDeliveryman> createState() => _HomeDeliverymanState();
+  State<HomeEnterprise> createState() => _HomeEnterpriseState();
 }
 
-class _HomeDeliverymanState extends State<HomeDeliveryman> {
+class _HomeEnterpriseState extends State<HomeEnterprise> {
   List<Delivery> deliveries = [];
 
   final deliveryRepository = DeliveryRepository();
@@ -48,19 +49,21 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
       body: Column(
         children: [
           const AppBarTitle(
-            firstTitle: 'Suas',
-            secondTitle: 'entregas',
-            // back: false,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const AvaliableBar(),
-          const SizedBox(
-            height: 20,
+            firstTitle: "Home",
+            secondTitle: "da empresa",
           ),
           ListContainer(
-            title: 'Entregas',
+            title: "Entregas",
+            action: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) {
+                    return const PackagesList();
+                  },
+                ),
+              );
+              reloadData();
+            },
             child: !_loading
                 ? ListView.builder(
                     physics: const BouncingScrollPhysics(),
@@ -68,7 +71,8 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
                     padding: const EdgeInsets.only(bottom: 20),
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      return DeliveryCard2(
+                      print(deliveries[index].status);
+                      return DeliveryCard(
                         delivery: deliveries[index],
                         changeStatus: () {
                           changeStatus(deliveries[index]);
@@ -80,21 +84,19 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
                     child: CircularProgressIndicator(),
                   ),
           ),
-          const SizedBox(
-            height: 30,
-          ),
         ],
       ),
     );
   }
 
   void changeStatus(Delivery delivery) {
-    if (delivery.id != null && delivery.status != null) {
+    if (delivery.id != null) {
       deliveryRepository.putStatus(
         delivery.id!,
-        delivery.status!,
+        ShippingStatus.inProgress,
         isEnterprise: true,
       );
+      reloadData();
     }
   }
 }

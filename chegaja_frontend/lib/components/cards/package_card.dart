@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DeliveryCard extends StatelessWidget {
-  const DeliveryCard({
+class PackageCard extends StatelessWidget {
+  const PackageCard({
     Key? key,
     required this.clientName,
     required this.wheigthPackage,

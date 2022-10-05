@@ -1,5 +1,5 @@
-import 'package:chegaja_frontend/screens/deliveryman/home.dart';
-import 'package:chegaja_frontend/screens/enterprise/home.dart';
+import 'package:chegaja_frontend/screens/deliveryman/home_deliveryman.dart';
+import 'package:chegaja_frontend/screens/enterprise/home_enterprise.dart';
 import 'package:flutter/material.dart';
 import '../components/gesture_button.dart';
 
