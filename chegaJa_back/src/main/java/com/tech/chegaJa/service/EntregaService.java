@@ -55,6 +55,7 @@ public class EntregaService {
     public EntregaDto atualizar(Long id, EntregaStatusForm form) {
         Entrega entrega= verificarExistencia(id);
         entrega.setStatus(form.getStatus());
+        repository.save(entrega);
         return(entrega.toDto());
     }
 
