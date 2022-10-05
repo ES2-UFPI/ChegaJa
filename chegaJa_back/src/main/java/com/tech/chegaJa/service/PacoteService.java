@@ -4,6 +4,7 @@ import com.tech.chegaJa.domain.dto.ClienteDto;
 import com.tech.chegaJa.domain.dto.PacoteDto;
 import com.tech.chegaJa.domain.form.PacoteForm;
 import com.tech.chegaJa.domain.model.Cliente;
+import com.tech.chegaJa.domain.model.Entrega;
 import com.tech.chegaJa.domain.model.Pacote;
 import com.tech.chegaJa.repository.PacoteRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,14 @@ import javax.persistence.EntityNotFoundException;
 public class PacoteService  {
     private final PacoteRepository repository;
     private final ClienteService clienteService;
+    private final EntregaService entregaService;
     public PacoteDto cadastrar(PacoteForm form){
         Pacote pacote = form.toEntity();
         ClienteDto cliente = clienteService.cadastrar(form.getClienteForm());
         pacote.setCliente(clienteService.verificarExistencia(cliente.getId()));
+        Entrega entrega = entregaService.verificarExistencia(form.getIdEntrega());
+        pacote.setEntrega(entrega);
+        entrega.getPacotes().add(pacote);
         repository.save(pacote);
         return pacote.toDto();
     }
