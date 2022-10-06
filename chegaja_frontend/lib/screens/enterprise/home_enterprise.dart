@@ -55,12 +55,12 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.share),
-        onPressed: () {
-          shareLocation();
-        },
-      ),
+      // floatingActionButton: FloatingActionButton(
+      //   child: const Icon(Icons.share),
+      //   onPressed: () {
+      //     shareLocation();
+      //   },
+      // ),
       body: Column(
         children: [
           const AppBarTitle(
@@ -69,8 +69,8 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
           ),
           ListContainer(
             title: "Entregas",
-            action: () {
-              Navigator.of(context).push(
+            action: () async {
+              await Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (_) {
                     return const PackagesList();

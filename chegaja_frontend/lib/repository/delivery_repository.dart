@@ -15,9 +15,11 @@ class DeliveryRepository {
 
   Future<List<Delivery>> fetchDeliveriesById(int id, bool isEnterprise) async {
     String path;
-    isEnterprise ? path = "entregas/entregador/" : path = "entregas/empresa/";
+    isEnterprise ? path = "entregas/empresa/" : path = "entregas/entregador/";
 
     final response = await dio.get(path + id.toString());
+
+    print(response.requestOptions.path);
 
     return List<Delivery>.from(
       response.data['content'].map(
@@ -27,6 +29,7 @@ class DeliveryRepository {
   }
 
   Future<Delivery> createDelivery(Delivery newDelivery) async {
+    print(newDelivery.toJson());
     final response = await dio.post('entregas', data: newDelivery.toJson());
 
     return Delivery.fromJson(response.data);
@@ -40,7 +43,7 @@ class DeliveryRepository {
 
   Future putStatus(int id, ShippingStatus status) async {
     final response = await dio.put(
-      'entregas/$id',
+      'entregas/$id/status',
       data: {"status": status.code},
     );
 

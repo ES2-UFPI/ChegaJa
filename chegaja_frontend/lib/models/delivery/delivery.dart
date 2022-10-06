@@ -36,12 +36,12 @@ class Delivery {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['data'] = this.data;
-    data['status'] = status;
+    data['status'] = status?.code;
     data['valorTotal'] = valorTotal;
     data['taxaServico'] = taxaServico;
     data['peso'] = peso;
     data['idEmpresa'] = idEmpresa;
-    data['idEntregador'] = idEntregador;
+    // data['idEntregador'] = idEntregador;
     return data;
   }
 }
