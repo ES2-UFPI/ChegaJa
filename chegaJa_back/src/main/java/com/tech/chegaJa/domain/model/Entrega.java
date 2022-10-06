@@ -32,6 +32,11 @@ public class Entrega {
     @OneToMany(fetch =FetchType.EAGER)
     private List<Pacote> pacotes;
     public EntregaDto toDto() {
-        return new EntregaDto(id,data,status,valorTotal,taxaServico,peso,empresa.getId(),entregador.getId());
+        if(entregador!=null) {
+            return new EntregaDto(id, data, status, valorTotal, taxaServico, peso, empresa.getId(), entregador.getId());
+        }
+        else {
+            return new EntregaDto(id, data, status, valorTotal, taxaServico, peso, empresa.getId(), null);
+        }
     }
 }
