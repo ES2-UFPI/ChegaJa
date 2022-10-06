@@ -1,9 +1,11 @@
+import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
+
 class Delivery {
   String? data;
-  String? status;
-  int? valorTotal;
-  int? taxaServico;
-  int? peso;
+  ShippingStatus? status;
+  double? valorTotal;
+  double? taxaServico;
+  double? peso;
   int? idEmpresa;
   int? idEntregador;
   int? id;
@@ -21,7 +23,8 @@ class Delivery {
 
   Delivery.fromJson(Map<String, dynamic> json) {
     data = json['data'];
-    status = json['status'];
+    status = ShippingStatus.values
+        .firstWhere((element) => element.code == json['status']);
     valorTotal = json['valorTotal'];
     taxaServico = json['taxaServico'];
     peso = json['peso'];
@@ -33,12 +36,12 @@ class Delivery {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['data'] = this.data;
-    data['status'] = status;
+    data['status'] = status?.code;
     data['valorTotal'] = valorTotal;
     data['taxaServico'] = taxaServico;
     data['peso'] = peso;
     data['idEmpresa'] = idEmpresa;
-    data['idEntregador'] = idEntregador;
+    // data['idEntregador'] = idEntregador;
     return data;
   }
 }

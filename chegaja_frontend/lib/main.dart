@@ -1,4 +1,3 @@
-import 'package:chegaja_frontend/screens/enterprise/delivery_list.dart';
 import 'package:chegaja_frontend/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';

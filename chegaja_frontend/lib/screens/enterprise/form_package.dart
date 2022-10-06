@@ -7,9 +7,6 @@ import '../../components/loading.dart';
 import '../../models/client/address.dart';
 import '../../models/client/client.dart';
 import '../../models/delivery/package.dart';
-import '../../repository/address_repository.dart';
-import '../../repository/client_repository.dart';
-import '../../repository/package_repository.dart';
 
 class FormPackage extends StatefulWidget {
   const FormPackage({Key? key}) : super(key: key);
@@ -19,34 +16,28 @@ class FormPackage extends StatefulWidget {
 }
 
 class _FormPackageState extends State<FormPackage> {
-  final _addressRepository = AddressRepository();
-  final _clientRepository = ClientRepository();
-  final _packageRepository = PackageRepository();
-
   final _formKey = GlobalKey<FormState>();
 
-  final _clientNameController = TextEditingController()..text = 'teste';
+  final _clientNameController = TextEditingController()..text = 'Cliente Novo';
   final _weightController = TextEditingController()..text = '000';
   final _contactController = MaskedTextController(mask: '(00) 00000-0000')
     ..text = '00000000000';
   final _streetController = TextEditingController()
-    ..text = 'testeeeeeeeeeeeeeeeeeeeeeee';
+    ..text = 'Um nome de rua aleatório';
   final _neighborhoodController = TextEditingController()
-    ..text = 'testeeeeeeeeeeeeeeeeeeeeeeeee';
+    ..text = 'Um nome de bairro aleatório';
   final _homeNumberController = TextEditingController()..text = '0000';
   final _cepController = MaskedTextController(mask: '00000-000')
     ..text = '00000000';
-  final _packageDescriptionController = TextEditingController()..text = 'teste';
+  final _packageDescriptionController = TextEditingController()
+    ..text = 'Descrição qualquer.';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          loadingDialog(context);
           await saveForm();
-          if (!mounted) return;
-          Navigator.of(context).pop();
         },
         child: const Icon(Icons.check),
       ),
@@ -163,6 +154,7 @@ class _FormPackageState extends State<FormPackage> {
 
   Future<void> saveForm() async {
     final FormState? form = _formKey.currentState;
+    loadingDialog(context);
     if (form?.validate() ?? false) {
       Address newAddress = Address(
         bairro: _neighborhoodController.text,
@@ -184,11 +176,14 @@ class _FormPackageState extends State<FormPackage> {
         peso: double.parse(_weightController.text),
       );
 
-      await _packageRepository.createPackage(newPackage);
-
+      // await _packageRepository.createPackage(newPackage);
       if (!mounted) return;
+      // To remove loadingDialog !
       Navigator.pop(context);
+      Navigator.pop(context, newPackage);
     } else {
+      // To remove loadingDialog !
+      Navigator.pop(context);
       debugPrint('Form is invalid.');
     }
   }

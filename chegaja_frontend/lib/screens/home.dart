@@ -1,5 +1,5 @@
-import 'package:chegaja_frontend/screens/deliveryman/home.dart';
-import 'package:chegaja_frontend/screens/enterprise/delivery_list.dart';
+import 'package:chegaja_frontend/screens/deliveryman/home_deliveryman.dart';
+import 'package:chegaja_frontend/screens/enterprise/home_enterprise.dart';
 import 'package:flutter/material.dart';
 import '../components/gesture_button.dart';
 
@@ -61,7 +61,7 @@ class Home extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const DeliveryList(),
+                      builder: (context) => const HomeEnterprise(),
                     ),
                   );
                 },
