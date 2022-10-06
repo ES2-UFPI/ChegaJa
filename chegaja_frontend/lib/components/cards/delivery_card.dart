@@ -1,13 +1,24 @@
 import 'package:chegaja_frontend/models/delivery/delivery.dart';
+import 'package:chegaja_frontend/screens/enterprise/maps_delivery.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryCard extends StatelessWidget {
-  const DeliveryCard({Key? key, required this.delivery, this.changeStatus})
+class DeliveryCard extends StatefulWidget {
+  const DeliveryCard(
+      {Key? key,
+      required this.delivery,
+      this.changeStatus,
+      required this.isEnterprise})
       : super(key: key);
 
   final Delivery delivery;
   final Function? changeStatus;
+  final bool isEnterprise;
 
+  @override
+  State<DeliveryCard> createState() => _DeliveryCardState();
+}
+
+class _DeliveryCardState extends State<DeliveryCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,23 +30,37 @@ class DeliveryCard extends StatelessWidget {
         ),
       ),
       child: ListTile(
+        leading: widget.isEnterprise
+            ? IconButton(
+                icon: const Icon(Icons.location_on),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) {
+                        return const MapsDelivery();
+                      },
+                    ),
+                  );
+                },
+              )
+            : null,
         trailing: GestureDetector(
           onTap: () {
-            if (changeStatus != null) {
-              changeStatus!();
+            if (widget.changeStatus != null) {
+              widget.changeStatus!();
             }
           },
           child: Chip(
             backgroundColor: Theme.of(context).colorScheme.primary,
             avatar: CircleAvatar(
-              backgroundColor: delivery.status?.color ?? Colors.black12,
+              backgroundColor: widget.delivery.status?.color ?? Colors.black12,
             ),
-            label: Text(delivery.status?.description ?? 'Sem status',
+            label: Text(widget.delivery.status?.description ?? 'Sem status',
                 style: const TextStyle(color: Color(0xFFF5F5F5))),
           ),
         ),
         title: Text(
-          delivery.id.toString(),
+          widget.delivery.id.toString(),
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
@@ -43,7 +68,7 @@ class DeliveryCard extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          '${delivery.peso} Kg',
+          '${widget.delivery.peso} Kg',
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w400,

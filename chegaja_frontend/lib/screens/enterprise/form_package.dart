@@ -25,18 +25,19 @@ class _FormPackageState extends State<FormPackage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  final _clientNameController = TextEditingController()..text = 'teste';
+  final _clientNameController = TextEditingController()..text = 'Cliente Novo';
   final _weightController = TextEditingController()..text = '000';
   final _contactController = MaskedTextController(mask: '(00) 00000-0000')
     ..text = '00000000000';
   final _streetController = TextEditingController()
-    ..text = 'testeeeeeeeeeeeeeeeeeeeeeee';
+    ..text = 'Um nome de rua aleatório';
   final _neighborhoodController = TextEditingController()
-    ..text = 'testeeeeeeeeeeeeeeeeeeeeeeeee';
+    ..text = 'Um nome de bairro aleatório';
   final _homeNumberController = TextEditingController()..text = '0000';
   final _cepController = MaskedTextController(mask: '00000-000')
     ..text = '00000000';
-  final _packageDescriptionController = TextEditingController()..text = 'teste';
+  final _packageDescriptionController = TextEditingController()
+    ..text = 'Descrição qualquer.';
 
   @override
   Widget build(BuildContext context) {

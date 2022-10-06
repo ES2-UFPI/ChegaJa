@@ -1,11 +1,15 @@
+import 'dart:async';
+
 import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 import '../../components/app_titles/app_bar_title.dart';
 import '../../components/cards/delivery_card.dart';
 import '../../components/list_container.dart';
 import '../../models/delivery/delivery.dart';
 import '../../repository/delivery_repository.dart';
+import '../../repository/enterprise_repository.dart';
 import 'packages_list.dart';
 
 class HomeEnterprise extends StatefulWidget {
@@ -19,8 +23,13 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
   List<Delivery> deliveries = [];
 
   final deliveryRepository = DeliveryRepository();
+  final enterpriseRepository = EnterpriseRepository();
 
   bool _loading = true;
+
+  final Location location = Location();
+
+  StreamSubscription<LocationData>? subscription;
 
   @override
   void initState() {
@@ -37,7 +46,7 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
       });
     }
 
-    deliveries = await deliveryRepository.fetchDeliveries();
+    deliveries = await deliveryRepository.fetchDeliveriesById(1, true);
     setState(() {
       _loading = false;
     });
@@ -46,6 +55,12 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.share),
+        onPressed: () {
+          shareLocation();
+        },
+      ),
       body: Column(
         children: [
           const AppBarTitle(
@@ -77,6 +92,7 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
                         changeStatus: () {
                           changeStatus(deliveries[index]);
                         },
+                        isEnterprise: true,
                       );
                     },
                   )
@@ -89,14 +105,25 @@ class _HomeEnterpriseState extends State<HomeEnterprise> {
     );
   }
 
-  void changeStatus(Delivery delivery) {
-    if (delivery.id != null) {
-      deliveryRepository.putStatus(
+  void changeStatus(Delivery delivery) async {
+    if (delivery.id != null && delivery.status == ShippingStatus.waiting) {
+      setState(() {
+        _loading = true;
+      });
+      await deliveryRepository.putStatus(
         delivery.id!,
         ShippingStatus.inProgress,
-        isEnterprise: true,
       );
       reloadData();
+    }
+  }
+
+  Future<void> shareLocation() async {
+    final event = await location.getLocation();
+    if (event.latitude != null && event.longitude != null) {
+      final response = await enterpriseRepository.searchDeliverymans(
+          event.latitude!, event.longitude!);
+      print(response);
     }
   }
 }

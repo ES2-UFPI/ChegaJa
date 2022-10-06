@@ -1,6 +1,7 @@
 import 'package:chegaja_frontend/components/app_titles/app_bar_title.dart';
 import 'package:chegaja_frontend/components/avaliable_bar.dart';
 import 'package:chegaja_frontend/components/list_container.dart';
+import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/cards/delivery_card.dart';
@@ -36,7 +37,7 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
       });
     }
 
-    deliveries = await deliveryRepository.fetchDeliveries();
+    deliveries = await deliveryRepository.fetchDeliveriesById(1, false);
     setState(() {
       _loading = false;
     });
@@ -73,6 +74,7 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
                         changeStatus: () {
                           changeStatus(deliveries[index]);
                         },
+                        isEnterprise: false,
                       );
                     },
                   )
@@ -88,13 +90,16 @@ class _HomeDeliverymanState extends State<HomeDeliveryman> {
     );
   }
 
-  void changeStatus(Delivery delivery) {
-    if (delivery.id != null && delivery.status != null) {
-      deliveryRepository.putStatus(
+  Future<void> changeStatus(Delivery delivery) async {
+    if (delivery.id != null && delivery.status == ShippingStatus.inProgress) {
+      setState(() {
+        _loading = true;
+      });
+      await deliveryRepository.putStatus(
         delivery.id!,
-        delivery.status!,
-        isEnterprise: true,
+        ShippingStatus.finished,
       );
+      reloadData();
     }
   }
 }

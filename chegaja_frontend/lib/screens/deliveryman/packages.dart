@@ -52,6 +52,7 @@ class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
                       changeStatus: () {
                         changeStatus(e);
                       },
+                      isEnterprise: false,
                     ),
                   )
                   .toList(),
@@ -67,7 +68,6 @@ class _PackagesDeliverymanState extends State<PackagesDeliveryman> {
       deliveryRepository.putStatus(
         delivery.id!,
         delivery.status!,
-        isEnterprise: true,
       );
     }
   }

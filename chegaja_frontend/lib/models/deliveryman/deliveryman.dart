@@ -4,7 +4,7 @@ class Deliveryman {
   String? telefone;
   String? nome;
   String? cpf;
-  int? pesoMaximo;
+  double? pesoMaximo;
   int? id;
 
   Deliveryman({
