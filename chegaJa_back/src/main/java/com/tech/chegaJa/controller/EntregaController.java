@@ -53,6 +53,6 @@ public class EntregaController {
     }
     @GetMapping("entregador/{idEntregador}")
     public ResponseEntity<Page<EntregaDto>> listarPorEntregador(@ParameterObject @PageableDefault(sort = "id") Pageable pageable,@PathVariable Long idEntregador){
-        return ResponseEntity.ok(service.listarPorEmpresa(pageable,idEntregador));
+        return ResponseEntity.ok(service.listarPorEntregador(pageable,idEntregador));
     }
 }
