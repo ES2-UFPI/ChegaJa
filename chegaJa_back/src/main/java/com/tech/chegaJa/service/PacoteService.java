@@ -13,6 +13,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -39,5 +42,9 @@ public class PacoteService  {
     }
     public Pacote verificarExistencia(Long id) {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Pacote inexistente"));
+    }
+    public List<PacoteDto> filtrarEntrega(Long idEntrega) {
+        List<Pacote> pacotes=repository.findAllByEntrega_Id(idEntrega);
+        return pacotes.stream().map(p->p.toDto()).collect(Collectors.toList());
     }
 }
