@@ -32,7 +32,7 @@ public class Entregador {
     }
 
     public EntregadorDto toDto(){
-        return new EntregadorDto(this.id,this.nome,this.cpf, pesoMaximo);
+        return new EntregadorDto(this.id,this.nome,this.cpf, pesoMaximo,this.latitude,this.longitude);
     }
 
     public BigDecimal getDistancia(BigDecimal latitude, BigDecimal longitude) {
