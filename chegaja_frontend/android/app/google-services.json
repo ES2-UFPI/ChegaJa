@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1076429964942",
+    "project_id": "chegaja-58013",
+    "storage_bucket": "chegaja-58013.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076429964942:android:822b5522a1a58ee749ebdf",
+        "android_client_info": {
+          "package_name": "com.example.chegaja_frontend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076429964942-qk65k4gm6grkhbicbavf5r2fu9srh18v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdBgpY9p126Us0VB1sACNAK7LGsXfR4Z8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076429964942-qk65k4gm6grkhbicbavf5r2fu9srh18v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
