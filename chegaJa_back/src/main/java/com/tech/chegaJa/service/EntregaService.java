@@ -32,8 +32,10 @@ public class EntregaService {
     private final EmpresaRepository empresaRepository;
     public EntregaDto cadastrar(EntregaForm form){
         Entrega entrega = form.toEntity();
-        Entregador entregador = entregadorRepository.findById(form.getIdEntregador()).get();
-        entrega.setEntregador(entregador);
+        if(form.getIdEntregador()!=null) {
+            Entregador entregador = entregadorRepository.findById(form.getIdEntregador()).get();
+            entrega.setEntregador(entregador);
+        }
         Empresa empresa = empresaRepository.findById(form.getIdEmpresa()).get();
         entrega.setEmpresa(empresa);
         repository.save(entrega);
