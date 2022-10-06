@@ -38,8 +38,21 @@ public class EntregaController {
     public ResponseEntity<EntregaDto> visualizar(@PathVariable Long id){
         return ResponseEntity.ok(service.visualizar(id));
     }
+    @PutMapping("/{id}/status")
+    public ResponseEntity<EntregaDto> atualizarStatus(@PathVariable Long id, @RequestBody EntregaStatusForm form){
+        return ResponseEntity.ok(service.atualizarStatus(id, form));
+    }
     @PutMapping("/{id}")
-    public ResponseEntity<EntregaDto> atualizar(@PathVariable Long id, @RequestBody EntregaStatusForm form){
+    public ResponseEntity<EntregaDto> atualizarFields(@PathVariable Long id, @RequestBody EntregaForm form){
         return ResponseEntity.ok(service.atualizar(id, form));
+    }
+
+    @GetMapping("empresa/{idEmpresa}")
+    public ResponseEntity<Page<EntregaDto>> listarPorEmpresa(@ParameterObject @PageableDefault(sort = "id") Pageable pageable,@PathVariable Long idEmpresa){
+        return ResponseEntity.ok(service.listarPorEmpresa(pageable,idEmpresa));
+    }
+    @GetMapping("entregador/{idEntregador}")
+    public ResponseEntity<Page<EntregaDto>> listarPorEntregador(@ParameterObject @PageableDefault(sort = "id") Pageable pageable,@PathVariable Long idEntregador){
+        return ResponseEntity.ok(service.listarPorEntregador(pageable,idEntregador));
     }
 }

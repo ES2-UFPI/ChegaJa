@@ -11,13 +11,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
+import lombok.RequiredArgsConstructor;
 
 import java.net.URI;
 
 @RestController
+@RequiredArgsConstructor
 public class NotificationsController {
-
-    FirebaseMessagingService firebaseService;
+    private final FirebaseMessagingService firebaseService;
 
     @RequestMapping("/notificacoes/solicitacao/entrega")
     @ResponseBody

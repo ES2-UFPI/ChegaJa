@@ -13,4 +13,6 @@ public class EntregadorDto {
     private String nome;
     private String cpf;
     private BigDecimal pesoMaximo;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 }

@@ -28,6 +28,8 @@ public class EntregadorService {
     private final EntregadorRepository repository;
     public EntregadorDto cadastrar(EntregadorForm form){
         Entregador entregador = form.toEntity();
+        entregador.setLongitude(BigDecimal.ZERO);
+        entregador.setLatitude(BigDecimal.ONE);
         repository.save(entregador);
         return entregador.toDto();
     }

@@ -19,6 +19,7 @@ public class PacoteDto {
     @Enumerated(EnumType.STRING)
     private StatusEntregaEnum status;
     private ClienteDto clienteDto;
+    private Long entregaId;
     private BigDecimal peso;
     //comentario
 }
