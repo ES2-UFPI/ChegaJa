@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 
-import '../repository/deliveryman_repository.dart';
-
 class AvaliableBar extends StatefulWidget {
   const AvaliableBar({Key? key}) : super(key: key);
 
@@ -16,7 +14,6 @@ class _AvaliableBarState extends State<AvaliableBar> {
   bool _light = false;
   final Location location = Location();
   StreamSubscription<LocationData>? subscription;
-  final deliverymanRepository = DeliverymanRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +69,6 @@ class _AvaliableBarState extends State<AvaliableBar> {
       await location.getLocation();
       subscription = location.onLocationChanged.listen((event) {
         print([event.latitude, event.longitude]);
-        if (event.latitude != null && event.longitude != null) {
-          deliverymanRepository.putLocation(
-              1, event.latitude!, event.longitude!);
-        }
       });
     } else {
       print('cancel');
