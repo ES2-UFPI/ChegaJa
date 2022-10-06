@@ -52,9 +52,26 @@ public class EntregaService {
         return repository.findById(id).orElseThrow(() -> new EntityNotFoundException("Entrega inexistente"));
     }
 
-    public EntregaDto atualizar(Long id, EntregaStatusForm form) {
+    public EntregaDto atualizarStatus(Long id, EntregaStatusForm form) {
         Entrega entrega= verificarExistencia(id);
         entrega.setStatus(form.getStatus());
+        repository.save(entrega);
+        return(entrega.toDto());
+    }
+    public EntregaDto atualizar(Long id, EntregaForm form) {
+        Entrega entrega= verificarExistencia(id);
+        if(form.getIdEntregador()!=null){
+            Entregador entregador=entregadorRepository.findById(form.getIdEntregador()).get();
+            entrega.setEntregador(entregador);
+        }
+        if(form.getIdEmpresa()!=null){
+            Empresa empresa=empresaRepository.findById(form.getIdEmpresa()).get();
+            entrega.setEmpresa(empresa);
+        }
+        if(form.getTaxaServico()!=null)
+            entrega.setTaxaServico(form.getTaxaServico());
+        if(form.getValorTotal()!=null)
+            entrega.setValorTotal(form.getValorTotal());
         repository.save(entrega);
         return(entrega.toDto());
     }
