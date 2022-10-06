@@ -23,9 +23,11 @@ public class Pacote {
     private StatusEntregaEnum status;
     @ManyToOne(fetch = FetchType.EAGER)
     private Cliente cliente;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Entrega entrega;
     private BigDecimal peso;
 
     public PacoteDto toDto() {
-        return new PacoteDto(id,descricao,codigoConfirmacao,status,cliente.toDto(),peso);
+        return new PacoteDto(id,descricao,codigoConfirmacao,status,cliente.toDto(),entrega.getId(),peso);
     }
 }

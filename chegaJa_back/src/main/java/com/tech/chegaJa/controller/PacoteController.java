@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/pacotes")
@@ -37,5 +38,9 @@ public class PacoteController {
     @GetMapping("/{id}")
     public ResponseEntity<PacoteDto> visualizar(@PathVariable Long id){
         return ResponseEntity.ok(service.visualizar(id));
+    }
+    @GetMapping("/entrega/{idEntrega}")
+    public ResponseEntity<List<PacoteDto>> visualizarPorEntrega(@PathVariable Long idEntrega){
+        return ResponseEntity.ok(service.filtrarEntrega(idEntrega));
     }
 }

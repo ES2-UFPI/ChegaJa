@@ -1,17 +1,14 @@
-import 'package:chegaja_frontend/models/deliveryman/shipping_status.dart';
 import 'package:flutter/material.dart';
 
-class DeliveryCard2 extends StatelessWidget {
-  const DeliveryCard2({
+class PackageCard extends StatelessWidget {
+  const PackageCard({
     Key? key,
+    required this.clientName,
     required this.wheigthPackage,
-    required this.deliveryNumber,
-    required this.status,
   }) : super(key: key);
 
-  final String deliveryNumber;
+  final String clientName;
   final String wheigthPackage;
-  final ShippingStatus status;
 
   @override
   Widget build(BuildContext context) {
@@ -24,16 +21,12 @@ class DeliveryCard2 extends StatelessWidget {
         ),
       ),
       child: ListTile(
-        trailing: Chip(
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          avatar: CircleAvatar(
-            backgroundColor: status.color,
-          ),
-          label: Text(status.description,
-              style: const TextStyle(color: Color(0xFFF5F5F5))),
+        trailing: const Icon(
+          Icons.remove_circle,
+          color: Color(0xFF262626),
         ),
         title: Text(
-          deliveryNumber,
+          clientName,
           style: const TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,

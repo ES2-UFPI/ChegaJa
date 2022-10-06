@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.MathContext;
 import java.math.BigDecimal;
 
 @Data
@@ -23,12 +24,23 @@ public class Entregador {
     private String nome;
     private String cpf;
     private BigDecimal pesoMaximo;
+    private BigDecimal latitude;
+    private BigDecimal longitude;
 
     public void setCnpj(String cpf) {
 
     }
 
     public EntregadorDto toDto(){
-        return new EntregadorDto(this.id,this.cpf,this.nome, pesoMaximo);
+        return new EntregadorDto(this.id,this.nome,this.cpf, pesoMaximo,this.latitude,this.longitude);
+    }
+
+    public BigDecimal getDistancia(BigDecimal latitude, BigDecimal longitude) {
+        BigDecimal primeiro = this.latitude.subtract(latitude).pow(2);
+        BigDecimal segundo = this.latitude.subtract(longitude).pow(2);
+        BigDecimal soma=primeiro.add(segundo);
+        double aux= soma.doubleValue();
+        BigDecimal raiz=new BigDecimal(Math.sqrt(aux));
+        return raiz;
     }
 }
